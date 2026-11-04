@@ -48,3 +48,10 @@ these histograms will not exactly reproduce the official NOvA results (see NOvA'
 * `HyperK_DesignReport_1805.04163.pdf`: Hyper-Kamiokande Design Report, arXiv:1805.04163 (ignored by git).
   Tables XXXVI–XXXVII (expected νe/νμ candidate events) are used to calibrate
   `far_detector_spectra/HyperK_FD_spectra.csv`; the numbers are copied in `tools/build_fd_spectra.py`.
+
+## GLoBES standard cross sections — `GLoBES_xsec/`
+
+* `XCC.dat`, `XQE.dat`, `XNC.dat`: σ/E per nucleon for CC inclusive, CC quasi-elastic and NC, as distributed with
+  GLoBES and its T2K / T2HK / NOvA configurations (<https://www.mpi-hd.mpg.de/personalhomes/globes/glb/>).
+* Low energy from M. D. Messier, PhD thesis (1999) (Super-Kamiokande, water); high energy from
+  Paschos & Yu, PRD 65, 033002 (2002). See `GLoBES_xsec/README.md`.

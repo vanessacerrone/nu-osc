@@ -1,0 +1,18 @@
+\begin{tikzpicture}[
+  font=\footnotesize, >=Stealth,
+  blk/.style={draw, rounded corners=2pt, thick, minimum height=2.3cm, text width=2.55cm, align=center, inner sep=3pt},
+  lab/.style={font=\footnotesize\bfseries, align=center},
+  num/.style={font=\footnotesize, align=center, text width=2.9cm},
+  arr/.style={->, very thick, color=gray!70}]
+  % blocks
+  \node[blk, fill=gray!12]   (p)  at (0,0)    {\textbf{Protons}\\[2pt] $\mathrm{POT}$\\[2pt] $1.49\times10^{21}$\\[2pt]{\scriptsize beam power $\times$ time / $E_p$}};
+  \node[blk, fill=yellow!15] (b)  at (3.35,0) {\textbf{Target, horns,\\ decay pipe}\\[2pt] $\pi^+\!\to\mu^+\nu_\mu$\\[2pt] $\Phi = 1.21\times10^{-14}$\\{\scriptsize $\nu_\mu$ cm$^{-2}$ POT$^{-1}$ at the FD}};
+  \node[blk, fill=red!8]     (o)  at (6.7,0)  {\textbf{Oscillation}\\[2pt] $L = 295$ km\\ $E_0 = 0.57$ GeV\\[2pt] $P(\nu_\mu\!\to\!\nu_e) = 0.053$};
+  \node[blk, fill=blue!8]    (d)  at (10.05,0){\textbf{Far detector}\\[2pt] $M = 22.5$ kt\\ $N_T = 1.35\times10^{34}$\\[2pt] $\sigma_{CC}(E_0) = 4.07\times10^{-39}$ cm$^2$};
+  \foreach \a/\b in {p/b, b/o, o/d} \draw[arr] (\a.east) -- (\b.west);
+  % running result under each block
+  \node[num, below=6pt of p] {$1.49\times10^{21}$ protons};
+  \node[num, below=6pt of b] {$\Phi\cdot\mathrm{POT} = 1.80\times10^{7}$\\ $\nu_\mu$/cm$^2$};
+  \node[num, below=6pt of o] {$\times P$: $9.6\times10^{5}$\\ $\nu_e$/cm$^2$};
+  \node[num, below=6pt of d] {$\times N_T\sigma = 5.5\times10^{-5}$ cm$^2$:\\ $\mathbf{N = 53}$ $\nu_e$ CC interactions};
+\end{tikzpicture}

@@ -1,0 +1,438 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{siunitx}
+\usepackage[margin=2.3cm]{geometry}
+\usepackage{hyperref}
+\usepackage{xurl}
+\sisetup{exponent-product=\times, separate-uncertainty}
+
+\newcommand{\numu}{\nu_\mu}
+\newcommand{\numubar}{\bar\nu_\mu}
+\newcommand{\nue}{\nu_e}
+\newcommand{\nuebar}{\bar\nu_e}
+\newcommand{\POT}{\mathrm{POT}}
+
+\emergencystretch=2em
+\begin{document}
+
+\noindent{\Large\bfseries Note: number of $\nu_e$ appearance events in long-baseline experiments}
+\vspace{1ex}\hrule\vspace{2ex}
+
+\section{General expression}
+
+The number of $\nu_\beta$ charged-current (CC) events produced by a $\nu_\alpha$ beam and selected in a far
+detector at a distance $L$ from the source is (see, e.g., Ref.~\cite{Huber:2004ka})
+\begin{equation}
+  N_{\alpha\to\beta} = \POT \; N_T \int dE \;
+  \frac{d\Phi_\alpha}{dE}(E)\; P_{\alpha\to\beta}(E, L)\; \sigma^{CC}_\beta(E)\; \varepsilon_\beta(E),
+  \label{eq:general}
+\end{equation}
+where
+\begin{itemize}
+  \item $d\Phi_\alpha/dE$ is the unoscillated $\nu_\alpha$ flux at the far detector, per proton on
+        target and per unit energy (units: $\nu$ cm$^{-2}$ GeV$^{-1}$ POT$^{-1}$);
+  \item $\POT$ is the number of protons on target delivered in the beam mode considered (the exposure);
+  \item $N_T$ is the number of target nucleons in the fiducial volume;
+  \item $P_{\alpha\to\beta}$ is the oscillation probability in matter;
+  \item $\sigma^{CC}_\beta$ is the CC cross section per nucleon of $\nu_\beta$, in \si{cm^2};
+  \item $\varepsilon_\beta$ is the selection efficiency.
+\end{itemize}
+In a full analysis Eq.~\eqref{eq:general} is also convolved with the detector energy response and
+backgrounds are added; neither is included here.
+
+\paragraph{Number of targets.}
+For a detector of fiducial mass $M$, counting one nucleon per atomic mass unit,
+\begin{equation}
+  N_T = \frac{M}{m_u} = M\,[\si{g}]\; N_A
+  \;\simeq\; \num{6.022e32}\times\frac{M}{\SI{1}{kt}} ,
+\end{equation}
+with $\SI{1}{kt} = \SI{e9}{g}$ and $N_A = \SI{6.02214076e23}{mol^{-1}}$~\cite{CODATA2018}.
+
+\paragraph{Two independent factors: beam and detector.}
+POT and $N_T$ are not related to each other: the first describes the beam, the second the detector.
+Eq.~\eqref{eq:general} factorizes as
+\begin{equation}
+  N = \underbrace{\Big(\POT \times \frac{d\Phi}{dE}\Big)}_{\text{beam: fluence}\ [\nu\,\mathrm{cm^{-2}\,GeV^{-1}}]}
+  \times
+  \underbrace{\Big(N_T \times \sigma^{CC}\Big)}_{\text{detector: target area}\ [\mathrm{cm^2}]}
+  \times\; P \times \varepsilon .
+\end{equation}
+The flux per POT, $d\Phi/dE$, is a property of the beamline (horns, target, decay pipe) and of the distance
+($\propto 1/L^2$) and off-axis angle of the detector; multiplied by the POT it gives the \emph{fluence}, the number of
+neutrinos crossing each cm$^2$ of the detector. $N_T\,\sigma^{CC}$ is the total cross-sectional area that the target
+nucleons offer to a neutrino. Their product is the expected number of interactions.
+
+\paragraph{POT, beam power and running time.}
+A beam of protons of energy $E_p$ delivered with average power $P_\text{beam}$ for an effective running time $t$
+accumulates
+\begin{equation}
+  \POT = \frac{P_\text{beam}\; t}{E_p\,[\mathrm{J}]}
+  = \num{6.24e20}\times\frac{P_\text{beam}}{\SI{1}{MW}}\times\frac{t}{\SI{e7}{s}}\times\frac{\SI{100}{GeV}}{E_p} ,
+  \label{eq:pot}
+\end{equation}
+using $\SI{1}{GeV} = \SI{1.602e-10}{J}$~\cite{CODATA2018}. Examples:
+\begin{itemize}
+  \item Hyper-K: $E_p=\SI{30}{GeV}$, $P_\text{beam}=\SI{1.3}{MW}$, $10\times\SI{e7}{s}$ give $\num{2.7e22}$~POT, the Design
+        Report exposure~\cite{Hyper-Kamiokande:2018ofw};
+  \item DUNE: $E_p=\SI{120}{GeV}$, $P_\text{beam}=\SI{1.2}{MW}$ and $\SI{1.1e21}{POT}$ per year~\cite{DUNE:2021cuw}, which by
+        Eq.~\eqref{eq:pot} corresponds to an effective $\SI{1.8e7}{s}$ of beam per calendar year.
+\end{itemize}
+The exposure of a long-baseline experiment is therefore often quoted as mass $\times$ power $\times$ time, e.g.\ in
+kt$\cdot$MW$\cdot$year (624~kt$\cdot$MW$\cdot$year for DUNE~\cite{DUNE:2021cuw}), since $N\propto M\times\POT\propto M\,P_\text{beam}\,t$.
+
+\section{Simplified one-energy formula}
+
+\subsection{Assumptions}
+\begin{enumerate}
+  \item \textbf{Pure beam}: the neutrino (antineutrino) beam contains only $\numu$ ($\numubar$).
+        The wrong-sign component and the intrinsic $\nue$ contamination of the beam are neglected,
+        and only the right-sign appearance signal is counted.
+  \item \textbf{One energy}: all neutrinos have the energy $E_0$, defined here as the flux-weighted mean
+        energy of the main peak of the beam (energy bins with a flux above 10\,\% of its maximum),
+        computed from the public fluxes of Sec.~\ref{sec:ingredients}.
+  \item \textbf{Total flux}: $\Phi = \int (d\Phi/dE)\,dE$ is the total $\numu$ ($\numubar$) flux at the far detector.
+  \item \textbf{One cross section}: the inclusive CC cross section per nucleon at $E_0$.
+  \item \textbf{Effective efficiency}: a single number $\varepsilon_\text{eff}$ per experiment and beam mode,
+        fixed on published predictions (Sec.~\ref{sec:eff}).
+  \item No backgrounds, no energy resolution, constant matter density.
+\end{enumerate}
+
+\subsection{The formula}
+With these assumptions Eq.~\eqref{eq:general} becomes
+\begin{equation}
+  \boxed{\;N = \varepsilon_\text{eff}\; P(\numu\to\nue; E_0, L)\; \sigma^{CC}(E_0)\; \Phi\; \POT\; N_T\;}
+  \label{eq:simple}
+\end{equation}
+Dimensional check:
+\begin{equation}
+  [\si{cm^2}]\times[\nu\,\si{cm^{-2}}\,\POT^{-1}]\times[\POT]\times[\text{nucleons}]
+  = \text{events}.
+\end{equation}
+Expressing each factor in its natural unit gives a practical version,
+\begin{equation}
+  N \simeq 60.2\;\varepsilon_\text{eff}\, P\,
+  \Big[\frac{\sigma^{CC}}{\SI{e-38}{cm^2}}\Big]
+  \Big[\frac{\Phi}{\SI{e-14}{cm^{-2}}\,\POT^{-1}}\Big]
+  \Big[\frac{\POT}{10^{21}}\Big]
+  \Big[\frac{M}{\si{kt}}\Big],
+  \label{eq:practical}
+\end{equation}
+since $10^{-38}\cdot10^{-14}\cdot10^{21}\cdot\num{6.022e32} = 60.2$.
+With $P=1$ and $\varepsilon_\text{eff}=1$, Eq.~\eqref{eq:simple} gives the number of CC interactions,
+$N_{P=1}$, there would be if every $\numu$ became a $\nue$.
+
+\section{Ingredients}
+\label{sec:ingredients}
+
+\paragraph{Fluxes.} T2K: 2020 public flux release at Super-Kamiokande~\cite{T2Kflux2020,T2K:2012bge}, also used
+for Hyper-Kamiokande, which shares the J-PARC beam, off-axis angle and baseline~\cite{Hyper-Kamiokande:2018ofw}.
+NOvA: 2017 public near-detector flux~\cite{NOvAflux2017}, scaled to the far detector as
+$(L_\text{ND}/L_\text{FD})^2 = (\SI{1}{km}/\SI{810}{km})^2$ (no far-detector flux is public).
+DUNE: far-detector flux of the TDR configuration~\cite{DUNE:2021cuw}.
+
+\paragraph{Cross sections.} For T2K, Hyper-K and NOvA, the standard inclusive CC cross section distributed with
+GLoBES~\cite{Huber:2004ka,Huber:2007ji} (file \texttt{XCC.dat}), which is taken at low energy from the Super-Kamiokande
+cross sections for water~\cite{Messier:1999kj} and at high energy from Ref.~\cite{Paschos:2001np}.
+For DUNE, the GENIE~\cite{Andreopoulos:2009rq} cross section on argon of the TDR configuration~\cite{DUNE:2021cuw}.
+At high energy $\sigma^{CC}/E \to 0.67$ ($\nu$) and $0.34$ ($\bar\nu$) $\times\SI{e-38}{cm^2\,GeV^{-1}}$~\cite{Formaggio:2012cpf}.
+
+\paragraph{Probabilities.} Three-flavor oscillations in constant-density matter computed with the NuFast
+algorithm~\cite{Denton:2024xmb}.
+
+\paragraph{Detectors and exposures.} Baselines, densities, fiducial masses and POT from the references in
+Table~\ref{tab:ingredients}.
+
+\begin{table}[ht]
+\centering
+\caption{Ingredients of Eq.~\eqref{eq:simple}. $E_0$, $\Phi$ and $\sigma^{CC}(E_0)$ are computed in this note from
+the fluxes and cross sections above.
+References: T2K~\cite{T2K:2011qtm,T2K:2021xwb}, NOvA~\cite{NOvA:2021nfi,NOvA:2025tmb},
+Hyper-K~\cite{Hyper-Kamiokande:2018ofw}, DUNE~\cite{DUNE:2021cuw}.}
+\label{tab:ingredients}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{llcccccccc}
+\toprule
+ & beam & $L$ [km] & $\rho$ [g/cm$^3$] & $M$ [kt] & $\POT$ & $E_0$ [GeV] & $\Phi$ [cm$^{-2}$\,POT$^{-1}$] & $\sigma^{CC}(E_0)$ [cm$^2$] & $N_T$ \\
+\midrule
+T2K     & $\nu$       & 295  & 2.6   & 22.5 & \num{1.494e21} & 0.57 & \num{1.207e-14} & \num{4.07e-39} & \num{1.35e34} \\
+        & $\bar\nu$   &      &       &      & \num{1.635e21} & 0.55 & \num{9.76e-15}  & \num{1.16e-39} &               \\
+Hyper-K & $\nu$       & 295  & 2.6   & 187  & \num{6.75e21}  & 0.57 & \num{1.207e-14} & \num{4.07e-39} & \num{1.13e35} \\
+        & $\bar\nu$   &      &       &      & \num{2.025e22} & 0.55 & \num{9.76e-15}  & \num{1.16e-39} &               \\
+NOvA    & $\nu$       & 810  & 2.84  & 14   & \num{2.661e21} & 1.80 & \num{1.806e-14} & \num{1.43e-38} & \num{8.43e33} \\
+        & $\bar\nu$   &      &       &      & \num{1.25e21}  & 1.79 & \num{1.467e-14} & \num{6.31e-39} &               \\
+DUNE    & $\nu$       & 1300 & 2.848 & 40   & \num{7.15e21}  & 2.31 & \num{1.548e-14} & \num{1.78e-38} & \num{2.41e34} \\
+        & $\bar\nu$   &      &       &      & \num{7.15e21}  & 2.27 & \num{1.385e-14} & \num{7.29e-39} &               \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Effective efficiency}
+\label{sec:eff}
+
+$\varepsilon_\text{eff}$ is fixed by requiring that Eq.~\eqref{eq:simple}, evaluated with the oscillation
+parameters and exposure of a published prediction, reproduces the published number of signal events
+$N_\text{ref}$:
+\begin{equation}
+  \varepsilon_\text{eff} = \frac{N_\text{ref}}{N_{\varepsilon=1}(\text{reference parameters})} .
+\end{equation}
+The reference predictions are listed in Table~\ref{tab:ref}:
+\begin{itemize}
+  \item \textbf{Hyper-K}: expected $\numu\to\nue$ ($\nu$ beam) and $\numubar\to\nuebar$ ($\bar\nu$ beam) signal
+        events, Tables~XXXVI--XXXVII of the Design Report~\cite{Hyper-Kamiokande:2018ofw}, for
+        $\sin^22\theta_{13}=0.1$, $\delta_{CP}=0$, $\sin^2\theta_{23}=0.5$,
+        $\Delta m^2_{32}=\SI{2.4e-3}{eV^2}$, $\sin^22\theta_{12}=0.8704$, $\Delta m^2_{21}=\SI{7.6e-5}{eV^2}$, normal ordering.
+  \item \textbf{NOvA}: right-sign appearance signal at the NOvA best fit, Table~2 of Ref.~\cite{NOvA:2025tmb}:
+        normal ordering, $\delta_{CP}=0.87\pi$, $\sin^2\theta_{23}=0.547$, $\Delta m^2_{32}=\SI{2.441e-3}{eV^2}$,
+        $\sin^22\theta_{13}=0.0851$~\cite{DayaBay:2022orm}; solar parameters $\sin^22\theta_{12}=0.851$,
+        $\Delta m^2_{21}=\SI{7.53e-5}{eV^2}$~\cite{ParticleDataGroup:2024cfk}.
+  \item \textbf{T2K}: Table~XI of Ref.~\cite{T2K:2021xwb} gives the total number of single-ring $e$-like events
+        (signal + background) for four values of $\delta_{CP}$, with the other parameters fixed to Table~III of the
+        same reference ($\sin^2\theta_{23}=0.528$, $\sin^2\theta_{13}=0.0212$, $\sin^2\theta_{12}=0.304$,
+        $\Delta m^2_{32}=\SI{2.509e-3}{eV^2}$, $\Delta m^2_{21}=\SI{7.53e-5}{eV^2}$, normal ordering).
+        Since the background does not depend on $\delta_{CP}$ to first order, the four values are fitted with
+        $N_\text{tot}(\delta_{CP}) = \varepsilon_\text{eff}\,N_{\varepsilon=1}(\delta_{CP}) + B$, which gives
+        $\varepsilon_\text{eff}$ and the background $B$ ($B = 19.6$ and $12.3$ events in the $\nu$ and $\bar\nu$ beams).
+        In the $\bar\nu$ beam the fit also absorbs the wrong-sign $\numu\to\nue$ contribution, which has the opposite
+        $\delta_{CP}$ dependence, so $\varepsilon_\text{eff}$ is less reliable there.
+  \item \textbf{DUNE}: no table of event numbers is published with the TDR configuration; $N_\text{ref}$ is the
+        right-sign appearance signal computed with the official GLoBES configuration of Ref.~\cite{DUNE:2021cuw}
+        (flux, GENIE cross sections, detector response; 6.5 + 6.5 years, 40 kt), for the parameters used in that
+        reference: NuFIT~4.0~\cite{Esteban:2018azc} normal ordering and $\delta_{CP}=0$.
+\end{itemize}
+
+\begin{table}[ht]
+\centering
+\caption{Calibration of the effective efficiency on published predictions.}
+\label{tab:ref}
+\small
+\begin{tabular}{llrrcl}
+\toprule
+ & beam & $N_{\varepsilon=1}$ & $N_\text{ref}$ & $\varepsilon_\text{eff}$ & reference \\
+\midrule
+T2K     & $\nu$     & fit (4 values) & 74.4 / 62.2 / 50.6 / 62.7 & 0.89 & \cite{T2K:2021xwb}, Table XI \\
+        & $\bar\nu$ & fit (4 values) & 17.1 / 19.6 / 21.7 / 19.3 & 0.72 & \cite{T2K:2021xwb}, Table XI \\
+Hyper-K & $\nu$     & 2063.8 & 1643   & 0.80 & \cite{Hyper-Kamiokande:2018ofw}, Tables XXXVI--XXXVII \\
+        & $\bar\nu$ & 1158.0 & 1183   & 1.02 & \cite{Hyper-Kamiokande:2018ofw}, Tables XXXVI--XXXVII \\
+NOvA    & $\nu$     & 291.7  & 125.3  & 0.43 & \cite{NOvA:2025tmb}, Table 2 \\
+        & $\bar\nu$ & 37.1   & 18.9   & 0.51 & \cite{NOvA:2025tmb}, Table 2 \\
+DUNE    & $\nu$     & 3493.6 & 2180.3 & 0.62 & \cite{DUNE:2021cuw}, GLoBES configuration \\
+        & $\bar\nu$ & 407.6  & 437.6  & 1.07 & \cite{DUNE:2021cuw}, GLoBES configuration \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Interpretation.} $\varepsilon_\text{eff}$ is a normalization, not a measured detector efficiency.
+It can be factorized as
+\begin{equation}
+  \varepsilon_\text{eff} =
+  \underbrace{\frac{N_\text{ref}}{\POT\,N_T\int\Phi(E)\,\sigma(E)\,P(E)\,dE}}_{\varepsilon_\text{det}}
+  \times
+  \underbrace{\frac{\int\Phi(E)\,\sigma(E)\,P(E)\,dE}{\Phi\;\sigma(E_0)\,P(E_0)}}_{c_\text{mono}} ,
+\end{equation}
+i.e., the selection efficiency $\varepsilon_\text{det}$ times a correction $c_\text{mono}$ for the one-energy
+approximation; $\varepsilon_\text{det}$ also absorbs any difference between the cross sections used here and those of
+the collaborations. Table~\ref{tab:cmono} gives $c_\text{mono}$, computed with the flux histograms, the cross sections and
+the probabilities of Sec.~\ref{sec:ingredients} at the reference parameters, and the resulting $\varepsilon_\text{det}$.
+
+\begin{table}[ht]
+\centering
+\caption{Factorization of $\varepsilon_\text{eff}$ into the one-energy correction $c_\text{mono}$ and
+$\varepsilon_\text{det}=\varepsilon_\text{eff}/c_\text{mono}$ (reference parameters of Table~\ref{tab:ref};
+T2K at $\delta_{CP}=-\pi/2$).}
+\label{tab:cmono}
+\small
+\begin{tabular}{lcccccc}
+\toprule
+ & \multicolumn{3}{c}{$\nu$ beam} & \multicolumn{3}{c}{$\bar\nu$ beam} \\
+\cmidrule(lr){2-4}\cmidrule(lr){5-7}
+ & $\varepsilon_\text{eff}$ & $c_\text{mono}$ & $\varepsilon_\text{det}$ & $\varepsilon_\text{eff}$ & $c_\text{mono}$ & $\varepsilon_\text{det}$ \\
+\midrule
+T2K     & 0.89 & 0.81 & 1.10 & 0.72 & 1.06 & 0.68 \\
+Hyper-K & 0.80 & 0.85 & 0.94 & 1.02 & 1.00 & 1.02 \\
+NOvA    & 0.43 & 0.79 & 0.54 & 0.51 & 0.83 & 0.61 \\
+DUNE    & 0.62 & 0.78 & 0.79 & 1.07 & 1.39 & 0.77 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+In the $\nu$ beams $E_0$ lies close to the oscillation maximum, while the flux is spread over energies where $P$ is
+smaller, so $c_\text{mono}\approx 0.8$ and $\varepsilon_\text{eff}$ is lower than the detector efficiency.
+In the $\bar\nu$ beams the antineutrino cross section grows quickly with energy, so the high-energy part of the flux
+weighs more: this compensates the lower $P$ at T2K and Hyper-K ($c_\text{mono}\approx 1$) and dominates at DUNE
+($c_\text{mono}\approx 1.4$). This, and not the beam contamination (the Hyper-K, NOvA and DUNE references are
+right-sign signal only), is why $\varepsilon_\text{eff}$ can exceed 1. The values of $\varepsilon_\text{det}$ above 1
+(T2K $\nu$, Hyper-K $\bar\nu$) show that $\varepsilon_\text{det}$ is not a pure selection efficiency either: it also
+contains the differences in cross sections and in the definition of the samples.
+
+\paragraph{Using $\varepsilon_\text{eff}=1$.} Setting $\varepsilon_\text{eff}=1$ gives the number of $\nue$ ($\nuebar$)
+CC interactions in the fiducial volume for a perfect detector and a monochromatic beam. This needs no calibration and
+is the choice of the tutorial \texttt{tutorial\_event\_counting.ipynb}; the published predictions are then used as a
+check, with $\varepsilon_\text{eff}$ of Table~\ref{tab:ref} playing the role of the ratio
+$N_\text{ref}/N_{\varepsilon=1}$. The bi-probability plots and the shape of the $\delta_{CP}$ dependence do not depend
+on this choice. The numbers of events grow by $1/\varepsilon_\text{eff}$ (a factor of about 2 for NOvA) and the
+significances become optimistic: with statistical errors only, the maximum sensitivity to CP violation (true NO) is
+$2.5\sigma$ (T2K), $4.4\sigma$ (NOvA), $17\sigma$ (Hyper-K) and $18\sigma$ (DUNE), instead of $2.3$, $2.9$, $16$ and
+$16\sigma$ with the calibrated values; with a $5\,\%$ normalization uncertainty the Hyper-K and DUNE values ($8.7\sigma$
+and $9.3\sigma$) are almost unchanged.
+
+\section{Worked example: T2K, neutrino beam}
+
+With Table~\ref{tab:ingredients} and Eq.~\eqref{eq:practical}, at the NuFIT~6.0 normal-ordering best fit~\cite{Esteban:2024eli},
+\begin{align}
+  N_{P=1} &= 60.2 \times 0.407 \times 1.207 \times 1.494 \times 22.5 \simeq 994, \\
+  N_{\varepsilon=1} &= P(E_0)\,N_{P=1} = 0.0533 \times 994 \simeq 53, \\
+  N &= \varepsilon_\text{eff}\,N_{\varepsilon=1} = 0.89 \times 53 \simeq 47 .
+\end{align}
+
+\begin{table}[ht]
+\centering
+\caption{Number of right-sign appearance signal events from Eq.~\eqref{eq:simple} with the effective efficiencies
+of Table~\ref{tab:ref}, at the NuFIT~6.0 normal-ordering best fit~\cite{Esteban:2024eli} and the exposures of
+Table~\ref{tab:ingredients}.}
+\label{tab:results}
+\begin{tabular}{llrcrcr}
+\toprule
+ & beam & $N_{P=1}$ & $P(E_0)$ & $N_{\varepsilon=1}$ & $\varepsilon_\text{eff}$ & $N$ \\
+\midrule
+T2K     & $\nu$     & 994   & 0.0533 & 53.0   & 0.89 & 47.2   \\
+        & $\bar\nu$ & 250   & 0.0316 & 7.9    & 0.72 & 5.7    \\
+Hyper-K & $\nu$     & 37336 & 0.0533 & 1990.5 & 0.80 & 1592.4 \\
+        & $\bar\nu$ & 25773 & 0.0316 & 813.7  & 1.02 & 830.0  \\
+NOvA    & $\nu$     & 5811  & 0.0547 & 317.7  & 0.43 & 136.6  \\
+        & $\bar\nu$ & 975   & 0.0249 & 24.3   & 0.51 & 12.4   \\
+DUNE    & $\nu$     & 47547 & 0.0738 & 3509.6 & 0.62 & 2175.9 \\
+        & $\bar\nu$ & 17380 & 0.0178 & 310.1  & 1.07 & 331.8  \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Sensitivity to CP violation}
+\label{sec:chi2}
+
+The question is: if the true value is $\delta_{CP}$, how strongly can an experiment that measures
+$N_\nu$ and $N_{\bar\nu}$ exclude CP conservation? The test statistic is built in five steps.
+
+\paragraph{Step 1: likelihood of a counting experiment.}
+The number of events $D_i$ observed in sample $i$ ($i=\nu,\bar\nu$) is Poisson distributed around the
+prediction $T_i$ of a hypothesis. The two beam modes are independent, so the likelihood is the product
+\begin{equation}
+  \mathcal L(T) = \prod_{i=\nu,\bar\nu} \frac{T_i^{D_i}\,e^{-T_i}}{D_i!} .
+\end{equation}
+
+\paragraph{Step 2: log-likelihood ratio.}
+A hypothesis is compared with the best possible description of the data, $T_i = D_i$, through
+$-2\ln$ of the likelihood ratio~\cite{ParticleDataGroup:2024cfk}:
+\begin{equation}
+  \chi^2(T) = -2\ln\frac{\mathcal L(T)}{\mathcal L(D)}
+  = 2\sum_i \left[T_i - D_i + D_i\ln\frac{D_i}{T_i}\right] .
+  \label{eq:poisson}
+\end{equation}
+
+\paragraph{Step 3: Gaussian limit.}
+Expanding Eq.~\eqref{eq:poisson} to second order in $(T_i-D_i)/D_i$ gives
+\begin{equation}
+  \chi^2(T) \simeq \sum_i \frac{(D_i - T_i)^2}{\sigma_i^2},\qquad \sigma_i^2 = D_i ,
+  \label{eq:gauss}
+\end{equation}
+i.e., each sample has a statistical variance equal to its number of events. The approximation is good for
+$D_i\gtrsim 10$; for smaller samples Eq.~\eqref{eq:poisson} should be used.
+
+\paragraph{Step 4: systematic uncertainty (pull method).}
+A normalization uncertainty $f$ on each sample is introduced as a nuisance parameter $a_i$, which rescales
+the prediction, $T_i\to(1+a_i)T_i$, and has a Gaussian prior of width $f$~\cite{Fogli:2002pt}:
+\begin{equation}
+  \chi^2(T) = \sum_i \min_{a_i}\left[\frac{\big(D_i - (1+a_i)T_i\big)^2}{D_i} + \frac{a_i^2}{f^2}\right]
+  = \sum_i \frac{(D_i - T_i)^2}{D_i + f^2 T_i^2}
+  \simeq \sum_i \frac{(D_i - T_i)^2}{D_i + f^2 D_i^2} ,
+  \label{eq:pull}
+\end{equation}
+where the minimum over $a_i$ is found analytically and the last step uses $T_i\simeq D_i$. The systematic
+uncertainty adds in quadrature to the statistical one: it is negligible for $D_i\ll 1/f^2$ and dominant for
+$D_i\gg 1/f^2$ (e.g., Hyper-K and DUNE with $f=5\,\%$, $1/f^2=400$).
+
+\paragraph{Step 5: expected sensitivity.}
+\begin{itemize}
+  \item \emph{Data.} For the expected (median) sensitivity the data are replaced by the prediction for the true
+        value, without fluctuations, $D_i = N_i(\delta_{CP})$: the Asimov data set~\cite{Cowan:2010js}. The best
+        fit is then the true value itself, with $\chi^2 = 0$.
+  \item \emph{Hypothesis to exclude.} CP conservation is the pair of points $\delta'=0$ and $\delta'=\pi$, with
+        predictions $T_i = N_i(\delta')$. Both must be rejected, so the relevant $\chi^2$ is that of the one that
+        fits best, i.e., the minimum over the two. If the mass ordering is not known, the minimum also includes the
+        CP-conserving points of the other ordering.
+  \item \emph{Significance.} By Wilks' theorem~\cite{Wilks:1938dza} the difference $\Delta\chi^2$ between the
+        $\chi^2$ of the hypothesis and that of the best fit follows a $\chi^2$ distribution with one degree of
+        freedom, and the significance is $n_\sigma = \sqrt{\Delta\chi^2}$: $\Delta\chi^2 = 9$ ($25$) corresponds to
+        $3\sigma$ ($5\sigma$)~\cite{ParticleDataGroup:2024cfk}.
+\end{itemize}
+
+\paragraph{Final formula.}
+Inserting $D_i = N_i(\delta_{CP})$ and $T_i = N_i(\delta')$ and taking the minimum over the CP-conserving points
+gives two versions.
+
+\emph{(a) Statistics only, no normalization nuisance.} From the Gaussian limit, Eq.~\eqref{eq:gauss}:
+\begin{equation}
+  \boxed{\;\Delta\chi^2_\text{stat}(\delta_{CP}) = \min_{\delta'\in\{0,\pi\}} \sum_{i=\nu,\bar\nu}
+  \frac{\left[N_i(\delta_{CP}) - N_i(\delta')\right]^2}{N_i(\delta_{CP})},
+  \qquad n_\sigma = \sqrt{\Delta\chi^2_\text{stat}}\;}
+  \label{eq:chi2stat}
+\end{equation}
+This is the sensitivity of a perfectly known normalization (flux, cross section and efficiency without
+uncertainty): it is limited only by the number of events and grows as $\sqrt{N}$, i.e., as the square root of the
+exposure.
+
+\emph{(b) With a normalization nuisance.} From the pull method, Eq.~\eqref{eq:pull}:
+\begin{equation}
+  \boxed{\;\Delta\chi^2(\delta_{CP}) = \min_{\delta'\in\{0,\pi\}} \sum_{i=\nu,\bar\nu}
+  \frac{\left[N_i(\delta_{CP}) - N_i(\delta')\right]^2}{N_i(\delta_{CP}) + \left(f\,N_i(\delta_{CP})\right)^2},
+  \qquad n_\sigma = \sqrt{\Delta\chi^2}\;}
+  \label{eq:chi2}
+\end{equation}
+with $N_i$ from Eq.~\eqref{eq:simple}. Eq.~\eqref{eq:chi2} reduces to Eq.~\eqref{eq:chi2stat} for $f=0$. For
+$N_i\gg1/f^2$ the denominator is dominated by $(fN_i)^2$ and $\Delta\chi^2$ no longer grows with the exposure: the
+measurement becomes systematics-limited. In this note $f=5\,\%$ is used as an illustrative value.
+
+\paragraph{Relation to the experiments' definition.}
+The CP-violation sensitivity is defined, as in the DUNE~\cite{DUNE:2020ypp} and Hyper-K~\cite{Hyper-Kamiokande:2018ofw}
+design studies, as $\sqrt{\Delta\chi^2}$ with respect to $\delta_{CP} = 0, \pi$ computed on Asimov data. Our version is a
+simplified counting version: Gaussian statistics, two samples, no backgrounds, fixed oscillation parameters.
+
+\paragraph{Limitations.}
+All other oscillation parameters are fixed at their true values (in a full analysis they are marginalized,
+which reduces the sensitivity); only two numbers per experiment are used, without the energy spectrum;
+backgrounds are neglected; Wilks' theorem is only approximately valid for the periodic parameter $\delta_{CP}$,
+and the experiments use the Feldman--Cousins method~\cite{Feldman:1997qc} for their final results.
+
+\begin{thebibliography}{99}
+\bibitem{Huber:2004ka} P.~Huber, M.~Lindner and W.~Winter, \emph{Simulation of long-baseline neutrino oscillation experiments with GLoBES}, Comput.\ Phys.\ Commun.\ 167 (2005) 195, hep-ph/0407333.
+\bibitem{Huber:2007ji} P.~Huber, J.~Kopp, M.~Lindner, M.~Rolinec and W.~Winter, \emph{New features in the simulation of neutrino oscillation experiments with GLoBES 3.0}, Comput.\ Phys.\ Commun.\ 177 (2007) 432, hep-ph/0701187.
+\bibitem{CODATA2018} E.~Tiesinga, P.~J. Mohr, D.~B. Newell and B.~N. Taylor, \emph{CODATA recommended values of the fundamental physical constants: 2018}, Rev.\ Mod.\ Phys.\ 93 (2021) 025010.
+\bibitem{T2Kflux2020} T2K Collaboration, \emph{Neutrino beam flux prediction 2020}, public data release, \url{https://t2k-experiment.org/results/neutrino-beam-flux-prediction-2020/}.
+\bibitem{T2K:2012bge} T2K Collaboration, K.~Abe \emph{et al.}, \emph{T2K neutrino flux prediction}, Phys.\ Rev.\ D 87 (2013) 012001, arXiv:1211.0469.
+\bibitem{NOvAflux2017} NOvA Collaboration, \emph{NOvA near detector flux}, FERMILAB-DATA-2017-01, doi:10.15484/1959359, \url{https://publicdocs.fnal.gov/cgi-bin/ShowDocument?docid=8}.
+\bibitem{DUNE:2021cuw} DUNE Collaboration, B.~Abi \emph{et al.}, \emph{Experiment simulation configurations approximating DUNE TDR}, arXiv:2103.04797.
+\bibitem{Hyper-Kamiokande:2018ofw} Hyper-Kamiokande Collaboration, K.~Abe \emph{et al.}, \emph{Hyper-Kamiokande Design Report}, arXiv:1805.04163.
+\bibitem{Messier:1999kj} M.~D. Messier, \emph{Evidence for neutrino mass from observations of atmospheric neutrinos with Super-Kamiokande}, PhD thesis, Boston University (1999), UMI-99-23965.
+\bibitem{Paschos:2001np} E.~A. Paschos and J.~Y. Yu, \emph{Neutrino interactions in oscillation experiments}, Phys.\ Rev.\ D 65 (2002) 033002, hep-ph/0107261.
+\bibitem{Andreopoulos:2009rq} C.~Andreopoulos \emph{et al.}, \emph{The GENIE neutrino Monte Carlo generator}, Nucl.\ Instrum.\ Meth.\ A 614 (2010) 87, arXiv:0905.2517.
+\bibitem{Formaggio:2012cpf} J.~A. Formaggio and G.~P. Zeller, \emph{From eV to EeV: neutrino cross sections across energy scales}, Rev.\ Mod.\ Phys.\ 84 (2012) 1307, arXiv:1305.7513.
+\bibitem{Denton:2024xmb} P.~B. Denton and S.~J. Parke, \emph{Fast and accurate algorithm for calculating long-baseline neutrino oscillation probabilities with matter effects: NuFast}, arXiv:2405.02400.
+\bibitem{T2K:2011qtm} T2K Collaboration, K.~Abe \emph{et al.}, \emph{The T2K experiment}, Nucl.\ Instrum.\ Meth.\ A 659 (2011) 106, arXiv:1106.1238.
+\bibitem{T2K:2021xwb} T2K Collaboration, K.~Abe \emph{et al.}, \emph{Improved constraints on neutrino mixing from the T2K experiment with $3.13\times10^{21}$ protons on target}, Phys.\ Rev.\ D 103 (2021) 112008, arXiv:2101.03779.
+\bibitem{NOvA:2021nfi} NOvA Collaboration, M.~A. Acero \emph{et al.}, \emph{Improved measurement of neutrino oscillation parameters by the NOvA experiment}, Phys.\ Rev.\ D 106 (2022) 032004, arXiv:2108.08219.
+\bibitem{NOvA:2025tmb} NOvA Collaboration, \emph{Precision measurement of neutrino oscillation parameters with 10 years of data from the NOvA experiment}, arXiv:2509.04361.
+\bibitem{DayaBay:2022orm} Daya Bay Collaboration, F.~P. An \emph{et al.}, \emph{Precision measurement of reactor antineutrino oscillation at kilometer-scale baselines by Daya Bay}, Phys.\ Rev.\ Lett.\ 130 (2023) 161802, arXiv:2211.14988.
+\bibitem{ParticleDataGroup:2024cfk} Particle Data Group, S.~Navas \emph{et al.}, \emph{Review of Particle Physics}, Phys.\ Rev.\ D 110 (2024) 030001.
+\bibitem{Esteban:2018azc} I.~Esteban \emph{et al.}, \emph{Global analysis of three-flavour neutrino oscillations: synergies and tensions in the determination of $\theta_{23}$, $\delta_{CP}$, and the mass ordering}, JHEP 01 (2019) 106, arXiv:1811.05487.
+\bibitem{Esteban:2024eli} I.~Esteban \emph{et al.}, \emph{NuFit-6.0: updated global analysis of three-flavor neutrino oscillations}, JHEP 12 (2024) 216, arXiv:2410.05380.
+\bibitem{Cowan:2010js} G.~Cowan, K.~Cranmer, E.~Gross and O.~Vitells, \emph{Asymptotic formulae for likelihood-based tests of new physics}, Eur.\ Phys.\ J.\ C 71 (2011) 1554, arXiv:1007.1727.
+\bibitem{Fogli:2002pt} G.~L. Fogli, E.~Lisi, A.~Marrone, D.~Montanino and A.~Palazzo, \emph{Getting the most from the statistical analysis of solar neutrino oscillations}, Phys.\ Rev.\ D 66 (2002) 053010, hep-ph/0206162.
+\bibitem{Wilks:1938dza} S.~S. Wilks, \emph{The large-sample distribution of the likelihood ratio for testing composite hypotheses}, Ann.\ Math.\ Statist.\ 9 (1938) 60.
+\bibitem{Feldman:1997qc} G.~J. Feldman and R.~D. Cousins, \emph{A unified approach to the classical statistical analysis of small signals}, Phys.\ Rev.\ D 57 (1998) 3873, physics/9711021.
+\bibitem{DUNE:2020ypp} DUNE Collaboration, B.~Abi \emph{et al.}, \emph{Deep Underground Neutrino Experiment (DUNE), Far Detector Technical Design Report, Volume II: DUNE Physics}, arXiv:2002.03005.
+\end{thebibliography}
+
+\end{document}

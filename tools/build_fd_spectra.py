@@ -280,7 +280,7 @@ Energies in GeV, events per bin."""
             mu, e = combine(t2k, m, t2k_oscillator(d), E, 295.0, 2.6)
             vals += [f"{m} mu {mu.sum():6.1f} ({pred[d][smu]:6.1f})", f"e {e.sum():5.1f} ({pred[d][se]:5.1f})"]
         print(f"  T2K delta = {d:+.2f}: " + ", ".join(vals))
-    header = f"""
+    header = """
 T2K far detector (Super-K): selected events per TRUE-energy bin if P = 1 (see far_detector_spectra/README.md).
 Built like HyperK_FD_spectra.csv (T2K 2020 SK flux, GENIE sigma/E, Hyper-K DR efficiencies) scaled to 22.5 kt and
 the Run 1-9 exposure (14.94e20 POT FHC, 16.35e20 POT RHC), then one normalisation per sample (mu-like, e-like; FHC, RHC)

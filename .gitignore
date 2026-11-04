@@ -26,3 +26,15 @@ data/HyperK_DR_1805.04163/*.pdf
 # packaging
 build/
 dist/
+
+# LaTeX build files (docs/)
+*.aux
+*.log
+*.out
+*.toc
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+
+# files saved by the Claude desktop app
+Claude outputs/
