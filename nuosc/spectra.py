@@ -15,7 +15,8 @@ get if the oscillation probability were 1. The prediction is simply
 >>> s = predict("DUNE", NeutrinoOscillator("NO"))
 >>> s["FHC"]["e_like"].sum()
 
-See far_detector_spectra/README.md for how each file was made.
+The files are built from the downloaded public data the first time they are
+needed (nuosc/fd_build.py). See far_detector_spectra/README.md for how each file is made.
 """
 
 from pathlib import Path
@@ -39,6 +40,19 @@ COMPONENTS = ("numu_mu", "numubar_mu", "numu_e", "numubar_e", "nue_e", "nuebar_e
               "numu_misid_e", "numubar_misid_e", "NC_mu", "NC_e")
 
 
+def build_fd_spectra():
+    """Build far_detector_spectra/ from the downloaded data (a few seconds, done once)."""
+    import contextlib
+    import io
+    from .fd_build import build_all
+    from .fetch import fetch_data
+
+    fetch_data()                                        # downloads are shown, the build log is not
+    print("building far_detector_spectra/ from the downloaded data (only the first time)")
+    with contextlib.redirect_stdout(io.StringIO()):
+        build_all()
+
+
 def load_fd_spectra(name, directory=None):
     """
     Read <name>_FD_spectra.csv. Returns a dict with 'E_lo', 'E_hi', 'E' (bin centres),
@@ -46,6 +60,8 @@ def load_fd_spectra(name, directory=None):
     """
     directory = Path(directory) if directory is not None else SPECTRA_DIR
     path = directory / f"{name}_FD_spectra.csv"
+    if not path.is_file() and directory == SPECTRA_DIR:
+        build_fd_spectra()
     header = [l[2:].strip() for l in open(path) if l.startswith("#")]
     cols = header[-1].split(",")
     d = np.loadtxt(path, delimiter=",")

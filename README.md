@@ -23,14 +23,15 @@ neutrino_oscillations/
 │   ├── fetch.py         # downloads the public data files from the original sources
 │   ├── dune_globes.py   # DUNE TDR simulation (official GLoBES configuration in Python)
 │   ├── spectra.py       # load / oscillate the far-detector spectra below
+│   ├── fd_build.py      # builds far_detector_spectra/ from the downloaded data
 │   ├── simple_counting.py  # one-energy event counting: N = P x sigma x Phi x POT x N_T (docs/number_of_events*.pdf)
 │   ├── plotting.py      # optional set_style(True/False): latex_style -> SciencePlots -> default
 │   └── paths.py         # finds the data folders
 ├── fluxes/              # public unoscillated fluxes, downloaded on first use (see fluxes/README.md)
 │   ├── DUNE/  ├── NOvA/  └── T2K/
-├── far_detector_spectra/  # T2K, NOvA, DUNE, HyperK: FD spectra ready to multiply by P (one CSV each)
+├── far_detector_spectra/  # T2K, NOvA, DUNE, HyperK: FD spectra ready to multiply by P, built on first use
 ├── tools/
-│   ├── build_fd_spectra.py    # rebuilds far_detector_spectra/
+│   ├── build_fd_spectra.py    # rebuilds far_detector_spectra/ (code in nuosc/fd_build.py)
 │   └── make_note_figures.py   # figures of docs/number_of_events_summary.pdf
 ├── data/                # public data and configurations, downloaded on first use (see data/README.md)
 │   ├── NOvA_2024_FD_release/  ├── T2K_OA2019_release/  ├── DUNE_GLoBES_2103.04797/  ├── HyperK_DR_1805.04163/
@@ -91,7 +92,7 @@ Some systems (recent macOS with Homebrew Python, Ubuntu ≥ 23.04) refuse this w
 **Data files.** The fluxes, cross sections and the DUNE configuration belong to the experiments and are
 not stored in this repository. They are downloaded from the original sources (a few MB, see
 [`CREDITS.md`](CREDITS.md)) the first time a notebook needs them, so the first run needs an internet
-connection. To download them in advance:
+connection; the far-detector spectra are then built from them on your computer. To download them in advance:
 
 ```bash
 python -m nuosc.fetch
@@ -215,7 +216,8 @@ s["FHC"]["e_like"].sum(), s["RHC"]["mu_like"].sum()
 
 Each `far_detector_spectra/<EXP>_FD_spectra.csv` lists selected events per energy bin for P = 1,
 split by flavour; multiply by the probabilities and add (recipe in the file header and in
-`far_detector_spectra/README.md`). The files can be used without `nuosc`.
+`far_detector_spectra/README.md`). They are built from the downloaded data the first time they are needed;
+after that the CSV files can be used without `nuosc`.
 
 ## Formulas
 

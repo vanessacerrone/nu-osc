@@ -21,15 +21,13 @@ dependencies = [
     "numpy>=1.21",
     "matplotlib>=3.5",
     "SciencePlots>=2.0",
+    "uproot>=5",
     "jupyter",
     "ipykernel",
 ]
 
 [project.urls]
 Repository = "https://github.com/vanessacerrone/neutrino_oscillations"
-
-[project.optional-dependencies]
-root = ["uproot>=5"]          # only needed by tools/build_fd_spectra.py (NOvA ROOT files)
 
 [tool.setuptools]
 packages = ["nuosc"]        # pip name nu-osc, imported as nuosc

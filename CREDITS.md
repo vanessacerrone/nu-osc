@@ -75,7 +75,9 @@ Kept in the repository:
 | file | content | cite |
 |---|---|---|
 | `data/T2K_OA2019_release/csv/T2K_OA2019_SK_event_rates.csv` | the numbers of Table XI of the T2K Run 1–9 paper (predicted and observed events per Super-K sample), transcribed from the paper | T2K Collaboration, Phys. Rev. D 103, 112008 (2021), [arXiv:2101.03779](https://arxiv.org/abs/2101.03779) |
-| `far_detector_spectra/` | spectra built by us (`tools/build_fd_spectra.py`) from the inputs above | the inputs above |
+
+The far-detector spectra in `far_detector_spectra/` are derived from the inputs above; they are not stored in the
+repository either, but built on the user's computer by `nuosc/fd_build.py` (cite the inputs above).
 
 Papers downloaded for reference (`*.pdf` in `data/`) are not redistributed (ignored by git).
 

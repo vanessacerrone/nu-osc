@@ -1,7 +1,8 @@
 # Far-detector spectra for T2K, NOvA, DUNE and Hyper-K
 
 One CSV per experiment, `<EXP>_FD_spectra.csv`, ready to be multiplied by oscillation
-probabilities. Each file has a comment header (source, exposure, baseline, density, recipe)
+probabilities. The files are not stored in the repository: `nuosc` builds them here from the downloaded
+public data (`nuosc/fd_build.py`) the first time `load_fd_spectra` or `predict` needs them. Each file has a comment header (source, exposure, baseline, density, recipe)
 followed by one row per energy bin:
 
 | column | meaning (events per bin **if P = 1**) | multiply by |
@@ -26,7 +27,7 @@ e_like  = P_mue*numu_e + Pbar_mue*numubar_e + P_ee*nue_e + Pbar_ee*nuebar_e
 with probabilities evaluated at `E_center` (use the baseline and density in the header),
 or simply `nuosc.predict("DUNE", NeutrinoOscillator("NO"))`. See `fd_spectra_quickstart.ipynb`.
 
-## How each file was made (`python tools/build_fd_spectra.py`)
+## How each file is made (`python tools/build_fd_spectra.py`)
 
 | experiment | ingredients | exposure | validation |
 |------------|-------------|----------|------------|
