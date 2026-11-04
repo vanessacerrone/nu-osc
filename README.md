@@ -10,7 +10,7 @@ with example plots. Written to be read and modified by bachelor students.
 ## Contents
 
 ```
-neutrino_oscillations/
+nu-osc/
 ├── nuosc/
 │   ├── constants.py     # physical constants, unit conventions
 │   ├── parameters.py    # NuFIT 6.0 best-fit values for NO and IO
@@ -24,7 +24,7 @@ neutrino_oscillations/
 │   ├── dune_globes.py   # DUNE TDR simulation (official GLoBES configuration in Python)
 │   ├── spectra.py       # load / oscillate the far-detector spectra below
 │   ├── fd_build.py      # builds far_detector_spectra/ from the downloaded data
-│   ├── simple_counting.py  # one-energy event counting: N = P x sigma x Phi x POT x N_T (docs/number_of_events*.pdf)
+│   ├── simple_counting.py  # one-energy event counting: N = P x sigma x Phi x POT x N_T (docs/number_of_events.pdf)
 │   ├── plotting.py      # optional set_style(True/False): latex_style -> SciencePlots -> default
 │   └── paths.py         # finds the data folders
 ├── fluxes/              # public unoscillated fluxes, downloaded on first use (see fluxes/README.md)
@@ -32,11 +32,11 @@ neutrino_oscillations/
 ├── far_detector_spectra/  # T2K, NOvA, DUNE, HyperK: FD spectra ready to multiply by P, built on first use
 ├── tools/
 │   ├── build_fd_spectra.py    # rebuilds far_detector_spectra/ (code in nuosc/fd_build.py)
-│   └── make_note_figures.py   # figures of docs/number_of_events_summary.pdf
+│   └── make_note_figures.py   # flux figure of docs/number_of_events.pdf
 ├── data/                # public data and configurations, downloaded on first use (see data/README.md)
 │   ├── NOvA_2024_FD_release/  ├── T2K_OA2019_release/  ├── DUNE_GLoBES_2103.04797/  ├── HyperK_DR_1805.04163/
 │   └── GLoBES_xsec/       # GLoBES standard cross sections (water)
-├── docs/                # number_of_events.pdf (full note), number_of_events_summary.pdf (short version), figures/
+├── docs/                # number_of_events.pdf (note on the event-counting model), figures/
 ├── pyproject.toml               # pip install -e .
 ├── GUIDE.md                      # detailed user guide: nu/nubar, NO/IO, matter, parameters, experiments
 ├── tutorial_nuosc.ipynb          # START HERE: how to use the code (probabilities only) + exercises

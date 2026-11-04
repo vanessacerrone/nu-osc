@@ -10,7 +10,7 @@ authors:
     affiliation: "University of Padova"
 version: 0.1.0
 license: MIT
-repository-code: "https://github.com/vanessacerrone/neutrino_oscillations"
+repository-code: "https://github.com/vanessacerrone/nu-osc"
 keywords:
   - neutrino oscillations
   - matter effects

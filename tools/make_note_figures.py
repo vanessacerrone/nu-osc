@@ -1,8 +1,7 @@
-"""Figures for docs/number_of_events_summary.tex: fluxes and cross sections used in the simplified formula.
+"""Figure for docs/number_of_events.tex: the fluxes used in the simplified formula.
 
-The figures are drawn at their final size in the document (text width 6.7 in), so font sizes are real sizes.
+The figure is drawn at its final size in the document (text width 6.7 in), so font sizes are real sizes.
 """
-import numpy as np
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
@@ -55,26 +54,4 @@ plt.tight_layout()
 plt.savefig(OUT / "fluxes.pdf")
 plt.close()
 
-# ---------------------------------------------------------------- cross sections
-E = np.logspace(-1, np.log10(20), 500)
-fig, ax = plt.subplots(figsize=(6.3, 3.3))
-lines = []
-for j, (fl, lab) in enumerate((("nue", r"$\nu_e$"), ("nuebar", r"$\bar\nu_e$"))):
-    lines += ax.plot(E, sc.sigma_cc(E, fl, "GLoBES") / E / 1e-38, color=c[j], lw=1.3, label=f"{lab}, GLoBES")
-    lines += ax.plot(E, sc.sigma_cc(E, fl, "GENIE-Ar") / E / 1e-38, color=c[j], lw=1.3, ls="--", label=f"{lab}, GENIE (Ar)")
-marks = {"T2K": "o", "NOvA": "s", "DUNE": "D"}
-for name, mk in marks.items():
-    for j, m in enumerate(sc.MODES):
-        g = sc.ingredients(name, m)
-        ax.plot(g["E0"], g["sigma"] / g["E0"] / 1e-38, mk, color=c[j], mec="k", mew=0.5, ms=5)
-    lines.append(plt.Line2D([], [], marker=mk, ls="none", color="gray", mec="k", mew=0.5,
-                            label=(name if name != "T2K" else "T2K / HK") + r" at $E_0$"))
-ax.set_xscale("log")
-ax.set_ylim(0, 1.0)
-ax.set_xlabel(r"$E_\nu$ [GeV]")
-ax.set_ylabel(r"$\sigma_{CC}/E$ [$10^{-38}$ cm$^2$ GeV$^{-1}$]")
-ax.legend(handles=lines, fontsize=LEGEND_SIZE, loc="center left", bbox_to_anchor=(1.02, 0.5), frameon=False)
-plt.tight_layout()
-plt.savefig(OUT / "cross_sections.pdf")
-plt.close()
 print("written", sorted(p.name for p in OUT.iterdir()))

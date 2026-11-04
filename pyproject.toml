@@ -27,7 +27,7 @@ dependencies = [
 ]
 
 [project.urls]
-Repository = "https://github.com/vanessacerrone/neutrino_oscillations"
+Repository = "https://github.com/vanessacerrone/nu-osc"
 
 [tool.setuptools]
 packages = ["nuosc"]        # pip name nu-osc, imported as nuosc
