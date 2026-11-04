@@ -2,12 +2,11 @@
 Public far-detector data used to build far_detector_spectra/
 =============================================================
 
-Only tools/build_fd_spectra.py needs this module; the notebooks read the finished spectra.
+Only nuosc/fd_build.py needs this module; the notebooks read the finished spectra.
 
 NOvA 2024 data release (FERMILAB-DATA-2025-05, doi:10.5281/zenodo.17822358, CC BY 4.0):
 26.61e20 POT neutrino beam + 12.5e20 POT antineutrino beam. `nuosc.fetch` downloads it into
-data/NOvA_2024_FD_release/data_release_2024/; reading the ROOT files needs `uproot`
-(pip install uproot).
+data/NOvA_2024_FD_release/data_release_2024/; the ROOT files are read with `uproot`.
 
   load_nova_2024_numu(mode) : numu CC sample vs reconstructed energy, all quartiles summed
       keys E_lo, E_hi, data, osc_total, osc_signal, osc_beam_bkg,

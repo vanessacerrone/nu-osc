@@ -46,3 +46,6 @@ fluxes/DUNE/*.txt
 data/DUNE_GLoBES_2103.04797/dune_globes/
 data/NOvA_2024_FD_release/data_release_2024/
 data/GLoBES_xsec/*.dat
+
+# Built locally from the downloaded data by nuosc.fd_build (derived from third-party inputs)
+far_detector_spectra/*.csv

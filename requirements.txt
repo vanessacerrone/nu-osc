@@ -2,5 +2,6 @@
 numpy>=1.21
 matplotlib>=3.5
 SciencePlots>=2.0
+uproot>=5
 jupyter
 ipykernel
