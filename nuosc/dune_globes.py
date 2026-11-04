@@ -2,7 +2,9 @@
 DUNE far-detector simulation from the official GLoBES configuration
 ====================================================================
 
-This is a small, pure-Python re-implementation of what GLoBES does with the
+This is a small, pure-Python re-implementation of what GLoBES (Huber, Lindner,
+Winter, Comput. Phys. Commun. 167, 195 (2005); 177, 432 (2007); no GLoBES code
+is included) does with the
 DUNE TDR configuration published with
 
     DUNE Collaboration, "Experiment Simulation Configurations Approximating
@@ -40,6 +42,7 @@ configuration, as stated in the paper.
 import re
 from pathlib import Path
 
+from .fetch import fetch_data
 from .paths import ROOT
 
 import numpy as np
@@ -102,6 +105,8 @@ class DUNEGlobes:
     """
 
     def __init__(self, directory=None, years_fhc=None, years_rhc=None, mass_kt=None):
+        if directory is None:
+            fetch_data()
         self.dir = Path(directory) if directory is not None else DUNE_GLOBES_DIR
         glb = _read(self.dir / "DUNE_GLoBES.glb")
         defs = _read(self.dir / "definitions.inc")

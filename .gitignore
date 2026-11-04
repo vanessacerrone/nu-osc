@@ -13,7 +13,7 @@ venv/
 ._*
 __MACOSX/
 
-# Original download archives (their extracted content is kept in the repo)
+# Original download archives
 *.zip
 *.tar
 *.tar.gz
@@ -26,3 +26,23 @@ data/HyperK_DR_1805.04163/*.pdf
 # packaging
 build/
 dist/
+
+# LaTeX build files (docs/)
+*.aux
+*.log
+*.out
+*.toc
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+
+# files saved by the Claude desktop app
+Claude outputs/
+
+# Data downloaded by nuosc.fetch from the original sources (not redistributed, see CREDITS.md)
+fluxes/T2K/t2kflux_2020_public_release/
+fluxes/NOvA/*.txt
+fluxes/DUNE/*.txt
+data/DUNE_GLoBES_2103.04797/dune_globes/
+data/NOvA_2024_FD_release/data_release_2024/
+data/GLoBES_xsec/*.dat

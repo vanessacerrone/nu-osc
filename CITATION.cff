@@ -1,0 +1,82 @@
+cff-version: 1.2.0
+message: >-
+  If you use this software, please cite it as below, and also cite NuFast and NuFIT
+  (probabilities) and the experiments' public releases you use (see CREDITS.md).
+title: "nu-osc: three-flavour neutrino oscillations in vacuum and matter, for teaching"
+type: software
+authors:
+  - family-names: Cerrone
+    given-names: Vanessa
+    affiliation: "University of Padova"
+version: 0.1.0
+license: MIT
+repository-code: "https://github.com/vanessacerrone/neutrino_oscillations"
+keywords:
+  - neutrino oscillations
+  - matter effects
+  - CP violation
+  - long-baseline experiments
+  - teaching
+references:
+  - type: article
+    title: "Fast and accurate algorithm for calculating long-baseline neutrino oscillation probabilities with matter effects: NuFast"
+    authors:
+      - family-names: Denton
+        given-names: Peter B.
+      - family-names: Parke
+        given-names: Stephen J.
+    identifiers:
+      - type: other
+        value: "arXiv:2405.02400"
+  - type: software
+    title: NuFast
+    authors:
+      - family-names: Denton
+        given-names: Peter B.
+    license: MIT
+    repository-code: "https://github.com/PeterDenton/NuFast"
+  - type: article
+    title: "NuFit-6.0: updated global analysis of three-flavor neutrino oscillations"
+    authors:
+      - family-names: Esteban
+        given-names: Ivan
+      - family-names: Gonzalez-Garcia
+        given-names: M. C.
+      - family-names: Maltoni
+        given-names: Michele
+      - family-names: Martinez-Soler
+        given-names: Ivan
+      - family-names: Pinheiro
+        given-names: João Paulo
+      - family-names: Schwetz
+        given-names: Thomas
+    journal: "Journal of High Energy Physics"
+    volume: 2024
+    issue: 12
+    start: 216
+    year: 2024
+    doi: "10.1007/JHEP12(2024)216"
+  - type: article
+    title: "Simulation of long-baseline neutrino oscillation experiments with GLoBES"
+    authors:
+      - family-names: Huber
+        given-names: Patrick
+      - family-names: Lindner
+        given-names: Manfred
+      - family-names: Winter
+        given-names: Walter
+    journal: "Computer Physics Communications"
+    volume: 167
+    start: 195
+    year: 2005
+    identifiers:
+      - type: other
+        value: "arXiv:hep-ph/0407333"
+  - type: report
+    title: "Experiment Simulation Configurations Approximating DUNE TDR"
+    authors:
+      - name: "DUNE Collaboration"
+    year: 2021
+    identifiers:
+      - type: other
+        value: "arXiv:2103.04797"
