@@ -1,6 +1,8 @@
 # Unoscillated far-detector fluxes
 
-Public flux predictions (no oscillations) used by `nuosc.fluxes`.
+Public flux predictions (no oscillations) used by `nuosc.fluxes`. They are **not redistributed** with
+this repository: `nuosc.fetch` downloads them from the sources below the first time `load_flux` is called
+(or run `python -m nuosc.fetch`), and checks their SHA-256.
 Load them with `nuosc.load_flux("DUNE", "FHC")`; everything is converted to
 **ν / cm² / GeV / POT at the far detector**.
 
@@ -16,14 +18,15 @@ FHC = forward horn current (neutrino-enhanced beam), RHC = reverse horn current
 
 * Source: <https://glaucus.crc.nd.edu/DUNEFluxes/OptimizedEngineeredNov2017/>
   (original names `histos_g4lbne_v3r5p4_QGSP_BERT_OptimizedEngineeredNov2017_{neutrino,antineutrino}_LBNEFD_globes_flux.txt`).
+  The same files are part of the ancillary files of arXiv:2103.04797; `nuosc.fetch` copies them from there.
   Optimized 3-horn design, 2.2 m target, as used in the DUNE TDR.
 * Format (GLoBES): `E_centre nue numu nutau nuebar numubar nutaubar`, 0.25 GeV bins.
 * Units: ν / m² / GeV / POT at 1300 km.
 
 ## T2K — `T2K/`
 
-`T2Kflux2020.tar.gz` is the original archive; `t2kflux_2020_public_release/` is its content
-(see `README.pdf` there). We use the Super-K text tables:
+`t2kflux_2020_public_release/` is the content of the original archive
+<https://t2k-experiment.org/wp-content/uploads/T2Kflux2020.gz> (see `README.pdf` there). We use the Super-K text tables:
 
 | file | content |
 |------|---------|

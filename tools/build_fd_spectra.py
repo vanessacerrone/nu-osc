@@ -43,6 +43,7 @@ from nuosc import NeutrinoOscillator, load_flux                       # noqa: E4
 from nuosc.formulas import prob_matter_nufast                          # noqa: E402
 from nuosc.dune_globes import DUNEGlobes, DUNE_GLOBES_DIR              # noqa: E402
 from nuosc.data import load_nova_2024_numu                             # noqa: E402
+from nuosc.fetch import fetch_data                                    # noqa: E402
 
 OUT = ROOT / "far_detector_spectra"
 N_A = 6.02214076e23
@@ -367,6 +368,7 @@ Energies in GeV, events per bin."""
 
 
 if __name__ == "__main__":
+    fetch_data()
     print("DUNE");    build_dune()
     print("Hyper-K and T2K"); build_hyperk_and_t2k()
     print("NOvA");    build_nova()

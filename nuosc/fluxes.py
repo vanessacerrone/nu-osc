@@ -175,11 +175,14 @@ def load_flux(experiment, mode="FHC", flux_dir=None):
     e.g. load_flux("DUNE", "RHC").
     """
     from .experiments import get_experiment
+    from .fetch import fetch_data
 
     cfg = get_experiment(experiment)
     if "flux" not in cfg:
         raise ValueError(f"No flux file configured for {cfg['name']}")
     fcfg = cfg["flux"]
+    if flux_dir is None:
+        fetch_data()
     flux_dir = Path(flux_dir) if flux_dir is not None else FLUX_DIR
     path = flux_dir / fcfg[mode]
     loader = LOADERS[fcfg["format"]]

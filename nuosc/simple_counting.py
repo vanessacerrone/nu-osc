@@ -15,6 +15,7 @@ import numpy as np
 
 from .oscillator import NeutrinoOscillator
 from .fluxes import load_flux
+from .fetch import fetch_data
 from .paths import ROOT
 
 N_A = 6.02214076e23          # nucleons per gram (1 / atomic mass unit), CODATA 2018
@@ -66,6 +67,7 @@ _XS = {}
 def xs_table(table):
     """sigma/E table [log10(E/GeV), sigma/E in 1e-38 cm^2/GeV per nucleon for 6 flavours]."""
     if table not in _XS:
+        fetch_data()
         path, smooth = XS_FILES[table]
         t = np.loadtxt(path)
         if smooth:            # the GENIE table is a noisy MC histogram below ~1 GeV

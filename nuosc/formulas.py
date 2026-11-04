@@ -111,6 +111,11 @@ def prob_matter_nufast(E, L, s2_12, s2_13, s2_23, delta_cp, dm2_21, dm2_31,
     Oscillation probabilities in constant-density matter with NuFast
     (P. B. Denton and S. J. Parke, arXiv:2405.02400).
 
+    This is a NumPy re-implementation of the NuFast algorithm, following the
+    reference implementation https://github.com/PeterDenton/NuFast
+    (MIT License, Copyright (c) 2024 Peter B. Denton; notice in CREDITS.md).
+    If you use it, please cite arXiv:2405.02400.
+
     Idea of the algorithm:
       * get the largest eigenvalue lambda3 of the Hamiltonian from the
         DMP approximation (optionally refined with N_Newton Newton steps);

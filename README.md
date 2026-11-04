@@ -1,6 +1,8 @@
-# neutrino_oscillations
+<p align="center"><img src="docs/figures/logo.png" alt="nu-osc: three neutrino flavor ghosts" width="600"></p>
 
-A small, self-contained Python package (`nuosc`) to compute three-flavour
+# nu-osc
+
+A small, self-contained Python package (`nu-osc`, imported as `nuosc`) to compute three-flavour
 neutrino oscillation probabilities **in vacuum** and **in constant-density
 matter**, for all nine channels $P(\nu_\alpha \to \nu_\beta)$, plus a notebook
 with example plots. Written to be read and modified by bachelor students.
@@ -17,19 +19,20 @@ neutrino_oscillations/
 │   ├── oscillator.py    # NeutrinoOscillator class (the thing you normally use)
 │   ├── fluxes.py        # loaders for the far-detector fluxes
 │   ├── rates.py         # cross section, event rates, toy energy smearing
-│   ├── data.py          # NOvA 2024 and T2K Run 1-9 far-detector data
+│   ├── data.py          # NOvA 2024 and T2K Run 1-9 inputs of tools/build_fd_spectra.py
+│   ├── fetch.py         # downloads the public data files from the original sources
 │   ├── dune_globes.py   # DUNE TDR simulation (official GLoBES configuration in Python)
 │   ├── spectra.py       # load / oscillate the far-detector spectra below
 │   ├── simple_counting.py  # one-energy event counting: N = P x sigma x Phi x POT x N_T (docs/number_of_events*.pdf)
 │   ├── plotting.py      # optional set_style(True/False): latex_style -> SciencePlots -> default
 │   └── paths.py         # finds the data folders
-├── fluxes/              # public unoscillated fluxes (see fluxes/README.md)
+├── fluxes/              # public unoscillated fluxes, downloaded on first use (see fluxes/README.md)
 │   ├── DUNE/  ├── NOvA/  └── T2K/
 ├── far_detector_spectra/  # T2K, NOvA, DUNE, HyperK: FD spectra ready to multiply by P (one CSV each)
 ├── tools/
 │   ├── build_fd_spectra.py    # rebuilds far_detector_spectra/
 │   └── make_note_figures.py   # figures of docs/number_of_events_summary.pdf
-├── data/                # public data and configurations (see data/README.md)
+├── data/                # public data and configurations, downloaded on first use (see data/README.md)
 │   ├── NOvA_2024_FD_release/  ├── T2K_OA2019_release/  ├── DUNE_GLoBES_2103.04797/  ├── HyperK_DR_1805.04163/
 │   └── GLoBES_xsec/       # GLoBES standard cross sections (water)
 ├── docs/                # number_of_events.pdf (full note), number_of_events_summary.pdf (short version), figures/
@@ -39,7 +42,7 @@ neutrino_oscillations/
 ├── tutorial_exercises_results.ipynb  # results of the two tutorial exercises
 ├── solutions_matter_biprobability.ipynb  # beyond the tutorial: matter effects, bi-probability, bi-event plots, delta_CP
 ├── oscillation_plots.ipynb       # probabilities
-├── realistic_event_rates.ipynb   # fluxes x probabilities x cross section = events; NOvA & T2K data
+├── realistic_event_rates.ipynb   # fluxes x probabilities x cross section = events
 ├── dune_tdr_simulation.ipynb     # DUNE with the official TDR GLoBES configuration
 ├── delta_cp_LE_interference.ipynb  # why P(numubar->nuebar) vs L/E looks "strange": delta_CP
 ├── fd_spectra_quickstart.ipynb   # use far_detector_spectra/ for all four experiments
@@ -84,6 +87,15 @@ Some systems (recent macOS with Homebrew Python, Ubuntu ≥ 23.04) refuse this w
 `error: externally-managed-environment`: use option A or B instead.
 
 `-e` (editable) keeps the package linked to this folder, so changes to `nuosc/` are used immediately.
+
+**Data files.** The fluxes, cross sections and the DUNE configuration belong to the experiments and are
+not stored in this repository. They are downloaded from the original sources (a few MB, see
+[`CREDITS.md`](CREDITS.md)) the first time a notebook needs them, so the first run needs an internet
+connection. To download them in advance:
+
+```bash
+python -m nuosc.fetch
+```
 
 **Check that it works**
 
@@ -179,8 +191,7 @@ integrate(E, samples["e_like"])              # total nu_e-like CC events
 
 Event rates use a linear CC cross section and efficiency 1; see `nuosc/rates.py`.
 The NOvA far-detector flux is approximated from the public near-detector flux
-(see `fluxes/README.md`); for NOvA the notebook also compares with the
-real far-detector data of the 2024 release (`nuosc/data.py`).
+(see `fluxes/README.md`).
 
 ### DUNE TDR simulation
 
@@ -192,7 +203,7 @@ s["signal"].sum(), s["background"].sum()     # selected events in reconstructed-
 ```
 
 Flux, GENIE cross sections on argon, smearing matrices and efficiencies are those of the DUNE
-GLoBES configuration (arXiv:2103.04797); the notebook reproduces the spectra of that paper.
+GLoBES configuration (arXiv:2103.04797).
 
 ### Far-detector spectra (the easy way)
 
@@ -222,3 +233,18 @@ Antineutrinos: $U \to U^*$ ($\delta_{CP}\to-\delta_{CP}$) and $A \to -A$.
 Default parameters: NuFIT 6.0 (IC24 with SK atmospheric data),
 [arXiv:2410.05380](https://arxiv.org/abs/2410.05380). Edit `nuosc/parameters.py`
 to use other values.
+
+## Credits and how to cite
+
+This project re-uses other people's work: the **NuFast** algorithm (Denton & Parke, MIT License) for the
+probabilities in matter, the **GLoBES** event-rate recipe, the **NuFIT 6.0** best-fit parameters, and public
+flux and data releases of **T2K, NOvA, DUNE and Hyper-K**, which are downloaded from their original sources and
+not redistributed. Everything is listed, with the references to cite
+and the terms of use, in [`CREDITS.md`](CREDITS.md). To cite this repository use [`CITATION.cff`](CITATION.cff)
+("Cite this repository" on GitHub), and please cite the original works too.
+
+## License
+
+The code is released under the [MIT License](LICENSE); the text and figures written for this repository
+(`docs/`, notebook text, `README.md`, `GUIDE.md`) under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+Third-party code, data and results keep their own terms (see [`CREDITS.md`](CREDITS.md)).

@@ -1,46 +1,39 @@
 # Public far-detector data
 
-## NOvA 2024 — `NOvA_2024_FD_release/`
-
-* Source: <https://novaexperiment.fnal.gov/data-releases/> → "Oscillation results using 2024
-  Bayesian approach", <https://publicdocs.fnal.gov/cgi-bin/ShowDocument?docid=594>
-  (FERMILAB-DATA-2025-05, DOI 10.5281/zenodo.17822358).
-* Exposure: 26.61×10²⁰ POT neutrino beam (FHC) + 12.5×10²⁰ POT antineutrino beam (RHC).
-* `NOvA_2024_data_release.zip`: original archive; `data_release_2024/`: its content
-  (ROOT files + NOvA's `README.md`).
-* `csv/`: plain-text versions made from the ROOT files (no ROOT/uproot needed), read by `nuosc.data`:
-
-| file | content |
-|------|---------|
-| `NOvA_2024_FD_numu_FHC.csv`, `NOvA_2024_FD_numu_RHC.csv` | νμ CC sample vs reconstructed energy (all quartiles summed): data, NOvA best-fit prediction (total, signal, beam bkg), no-oscillation prediction, cosmics |
-| `NOvA_2024_FD_nue_totals.csv` | νe samples, total events: data and prediction by component (the νe histograms use PID × energy "analysis bins") |
-
-The NOvA predictions are at NOvA's best-fit oscillation parameters and systematic pulls; fits to
-these histograms will not exactly reproduce the official NOvA results (see NOvA's README).
+These files belong to the experiments and authors and are **not redistributed** with this repository.
+`nuosc.fetch` downloads them from the original sources the first time they are needed (or run
+`python -m nuosc.fetch`); the SHA-256 of every download is checked. Sources, terms and references to cite
+are in [`../CREDITS.md`](../CREDITS.md).
 
 ## DUNE TDR GLoBES configuration — `DUNE_GLoBES_2103.04797/`
 
 * Source: ancillary files of DUNE Collaboration, *Experiment Simulation Configurations Approximating
-  DUNE TDR*, [arXiv:2103.04797](https://arxiv.org/abs/2103.04797).
+  DUNE TDR*, [arXiv:2103.04797](https://arxiv.org/abs/2103.04797) (v2), downloaded from
+  <https://arxiv.org/src/2103.04797v2> (only `anc/dune_globes/` is extracted).
 * `dune_globes/`: the GLoBES configuration (`DUNE_GLoBES.glb`, `definitions.inc`, flux, GENIE cross
   sections, smearing matrices, efficiencies), read directly by `nuosc.dune_globes.DUNEGlobes`.
-* `dune_flux/`: ND and FD fluxes (ROOT + GLoBES text).
-* `*.png`, `tdr_configs_arxiv.tex`: figures and source of the paper, used in
-  `dune_tdr_simulation.ipynb` to validate our implementation.
 * Default exposure: 6.5 + 6.5 years at 1.1e21 POT/yr (1.2 MW), 40 kt = 624 kt-MW-yr ("10 years staged").
+
+## NOvA 2024 — `NOvA_2024_FD_release/`
+
+* Source: <https://novaexperiment.fnal.gov/data-releases/> → "Oscillation results using 2024
+  Bayesian approach" (FERMILAB-DATA-2025-05, [doi:10.5281/zenodo.17822358](https://doi.org/10.5281/zenodo.17822358),
+  CC BY 4.0).
+* Exposure: 26.61×10²⁰ POT neutrino beam (FHC) + 12.5×10²⁰ POT antineutrino beam (RHC).
+* `data_release_2024/`: the content of the archive (ROOT files + NOvA's `README.md`). Only
+  `tools/build_fd_spectra.py` reads it (through `nuosc.data.load_nova_2024_numu`, which needs `uproot`):
+  the νμ CC sample vs reconstructed energy (all quartiles summed), NOvA's best-fit and no-oscillation
+  predictions, and cosmics.
+
+The NOvA predictions are at NOvA's best-fit oscillation parameters and systematic pulls; fits to
+these histograms will not exactly reproduce the official NOvA results (see NOvA's README).
 
 ## T2K Run 1-9 — `T2K_OA2019_release/`
 
-* Source: <https://t2k-experiment.org/results/t2kdata-oa-2019/> (data release of
-  [arXiv:2101.03779](https://arxiv.org/abs/2101.03779), PRD 103, 112008), 14.94e20 POT FHC + 16.35e20 POT RHC.
-* `Analysis_{A,B,C}.root`, `README`: official release (confidence regions, Δχ², posteriors).
-* T2K does not release far-detector spectra. `csv/` contains, as plain text:
-
-| file | content |
-|------|---------|
-| `T2K_OA2019_SK_event_rates.csv` | Table XI of the paper: predicted events per SK sample for δCP = −π/2, 0, π/2, π, and observed events |
-| `T2K_OA2019_A_dchi2_dcp_wRC_{NO,IO}.csv` | official Δχ² vs δCP (analysis A, with reactor constraint), from `Analysis_A.root` |
-
+* T2K does not release far-detector spectra. `csv/T2K_OA2019_SK_event_rates.csv` contains the numbers of
+  **Table XI** of T2K Collaboration, PRD 103, 112008 (2021), [arXiv:2101.03779](https://arxiv.org/abs/2101.03779)
+  (14.94e20 POT FHC + 16.35e20 POT RHC): predicted events per SK sample for δCP = −π/2, 0, π/2, π, and observed
+  events. It is used to normalize `far_detector_spectra/T2K_FD_spectra.csv`.
 * `T2K_2101.03779.pdf` (the paper, for reference) is ignored by git.
 
 ## Hyper-K Design Report — `HyperK_DR_1805.04163/`
@@ -51,7 +44,7 @@ these histograms will not exactly reproduce the official NOvA results (see NOvA'
 
 ## GLoBES standard cross sections — `GLoBES_xsec/`
 
-* `XCC.dat`, `XQE.dat`, `XNC.dat`: σ/E per nucleon for CC inclusive, CC quasi-elastic and NC, as distributed with
+* `XCC.dat`, `XQE.dat`: σ/E per nucleon for CC inclusive and CC quasi-elastic, as distributed with
   GLoBES and its T2K / T2HK / NOvA configurations (<https://www.mpi-hd.mpg.de/personalhomes/globes/glb/>).
 * Low energy from M. D. Messier, PhD thesis (1999) (Super-Kamiokande, water); high energy from
   Paschos & Yu, PRD 65, 033002 (2002). See `GLoBES_xsec/README.md`.
